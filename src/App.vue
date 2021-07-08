@@ -1,6 +1,7 @@
 
   <template>
    <v-app>
+     <main class="main">
      <v-card>
          <v-card-actions>
    <v-text-field
@@ -77,9 +78,11 @@
         </v-list-item-subtitle>
       </v-list-item>
     </v-list>
+   
 
 
   </v-card>
+   </main>
   </v-app>
   
 
@@ -87,15 +90,12 @@
 
 <script>
 export default {
-    data () {
-      return {
-       
-     weatherData: {},
-       
-       
-      }
-    },
-  
+  data() {
+    return {
+      weatherData: {},
+    };
+  },
+
   mounted() {
     fetch(
       "https://api.openweathermap.org/data/2.5/weather?q=Cordoba&appid=8de24b65852e6b354d3e60e84a5a209b"
@@ -110,11 +110,11 @@ export default {
 </script>
 
 <style scoped>
-/* .main {
+.main {
   display: grid;
   place-items: center;
   background: grey;
   min-height: 100vh;
-  color: white; 
-}*/
+  color: white;
+}
 </style> 
