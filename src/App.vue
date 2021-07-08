@@ -29,9 +29,9 @@
       <v-row align="center">
         <v-col
           class="text-h2"
-          cols="5"
+          cols="6"
         >
-          {{weatherData.main.temp}}&deg;C
+          {{weatherData.main.temp}} F
         </v-col>
         <v-col cols="6">
           <v-img
@@ -47,9 +47,9 @@
       <v-list-item-subtitle>Min: {{weatherData.main.temp_max}}</v-list-item-subtitle>
     </v-list-item>
     <v-list-item>
-      <!-- <v-list-item-icon>
+      <v-list-item-icon>
         <v-icon>mdi-send</v-icon>
-      </v-list-item-icon> -->
+      </v-list-item-icon>
       <v-list-item-subtitle>Feels like: {{weatherData.main.feels_like}}</v-list-item-subtitle>
     
     </v-list-item>
@@ -58,7 +58,7 @@
       <v-list-item-icon>
         <v-icon>mdi-cloud-download</v-icon>
       </v-list-item-icon>
-      <v-list-item-subtitle>{{weatherData.main.humidity}}</v-list-item-subtitle>
+      <v-list-item-subtitle>{{weatherData.main.humidity}}%</v-list-item-subtitle>
     </v-list-item>
 
 
