@@ -26,7 +26,7 @@
     <v-list-item two-line>
       <v-list-item-content>
         <v-list-item-title class="text-h4">{{ weatherData.name }}</v-list-item-title>
-        <v-list-item-title class="text h6">{{weatherData.sys.country}} , {{weatherData.weather[0].description}}</v-list-item-title>
+        <v-list-item-title class="text h5">{{weatherData.sys.country}} , {{weatherData.weather[0].description}}</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
 
