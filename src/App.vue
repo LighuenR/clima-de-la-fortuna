@@ -2,7 +2,10 @@
   <template>
    <v-app>
      <main class="main">
-     <v-card>
+     <v-card
+      color="rgba(0, 0, 0, 0.3)"
+     dark
+     >
          <v-card-actions>
    <v-text-field
             label="Ingrese una ciudad"
@@ -14,14 +17,16 @@
     </v-card-actions>
      </v-card>
   <v-card
-    class="mx-auto"
+    class="mx-auto main-card"
     max-width="400"
+    color="rgba(0, 0, 0, 0.3)"
+    dark
   >
 
     <v-list-item two-line>
       <v-list-item-content>
-        <v-list-item-title class="text-h5">{{ weatherData.name }}</v-list-item-title>
-        <v-list-item-subtitle>{{weatherData.sys.country}} , {{weatherData.weather[0].description}}</v-list-item-subtitle>
+        <v-list-item-title class="text-h4">{{ weatherData.name }}</v-list-item-title>
+        <v-list-item-title class="text h6">{{weatherData.sys.country}} , {{weatherData.weather[0].description}}</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
 
@@ -29,11 +34,15 @@
       <v-row align="center">
         <v-col
           class="text-h2"
-          cols="6"
+          cols="12"
         >
           {{weatherData.main.temp}} F
         </v-col>
-        <v-col cols="6">
+        <v-list-item>
+      <v-list-item-title class="text-h7">Temp max: {{weatherData.main.temp_max}} F</v-list-item-title>
+      <v-list-item-title class="text-h7">Temp min: {{weatherData.main.temp_min}} F</v-list-item-title>
+    </v-list-item>
+        <v-col cols="12">
           <v-img
             src="https://cdn.vuetifyjs.com/images/cards/sun.png"
             alt="Sunny image"
@@ -42,15 +51,12 @@
         </v-col>
       </v-row>
     </v-card-text>
- <v-list-item>
-        <v-list-item-subtitle>Min: {{weatherData.main.temp_min}}</v-list-item-subtitle>
-      <v-list-item-subtitle>Min: {{weatherData.main.temp_max}}</v-list-item-subtitle>
-    </v-list-item>
+ 
     <v-list-item>
       <v-list-item-icon>
         <v-icon>mdi-send</v-icon>
       </v-list-item-icon>
-      <v-list-item-subtitle>Feels like: {{weatherData.main.feels_like}}</v-list-item-subtitle>
+      <v-list-item-title class="text-h5">Feels like: {{weatherData.main.feels_like}}</v-list-item-title>
     
     </v-list-item>
    
@@ -58,28 +64,8 @@
       <v-list-item-icon>
         <v-icon>mdi-cloud-download</v-icon>
       </v-list-item-icon>
-      <v-list-item-subtitle>{{weatherData.main.humidity}}%</v-list-item-subtitle>
+      <v-list-item-title class="text-h5">Humidity {{weatherData.main.humidity}}%</v-list-item-title>
     </v-list-item>
-
-
-    <v-list class="transparent">
-      <v-list-item
-        v-for="item in forecast"
-        :key="item.day"
-      >
-        <v-list-item-title>{{ item.day }}</v-list-item-title>
-
-        <v-list-item-icon>
-          <v-icon>{{ item.icon }}</v-icon>
-        </v-list-item-icon>
-
-        <v-list-item-subtitle class="text-right">
-          {{ item.temp }}
-        </v-list-item-subtitle>
-      </v-list-item>
-    </v-list>
-   
-
 
   </v-card>
    </main>
@@ -112,9 +98,12 @@ export default {
 <style scoped>
 .main {
   display: grid;
+  background: blue;
   place-items: center;
-  background: grey;
   min-height: 100vh;
   color: white;
+  opacity: 0.5;
+  
 }
+
 </style> 
