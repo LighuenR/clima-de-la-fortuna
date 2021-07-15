@@ -13,6 +13,8 @@
             id="sendCity"
           > -->
           <v-text-field
+           @keyup.enter="getCurrentWeather();
+              expand = !expand;"
             label="Ingrese una ciudad"
             ingrese
             una
@@ -21,7 +23,6 @@
           >
           </v-text-field>
           <v-btn
-            type="submit"
             @click="
               getCurrentWeather();
               expand = !expand;
