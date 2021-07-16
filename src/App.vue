@@ -20,11 +20,11 @@
           <img style="width: 100%" src="./assets/cloud.png" alt="" />
         </div>
       </div>
-      <div class="sun" v-if="description === 'clear sky'"></div>
+
       <v-container d-flex justify-center aling-center>
         <v-card
           width="100%"
-          max-width="600"
+          max-width="400"
           color="rgba(0, 0, 0, 0.3)"
           dark
           class="glass d-flex align-center py-2"
@@ -48,15 +48,18 @@
         </v-card>
       </v-container>
       <v-container>
+
         <v-expand-transition>
           <v-card
-            class="mx-auto main-card glass pa-4 mt-2"
-            max-width="600"
+            class="mx-auto main-card glass pa-4 mt-2 d-grid"
+            max-width="400"
             width="100%"
             color="rgba(0, 0, 0, 0.3)"
             dark
             v-if="weatherData.name"
           >
+          <v-row class="align-center">
+            <v-col cols="6">
             <h1>
               {{ weatherData.name }}
             </h1>
@@ -66,49 +69,56 @@
               {{ weatherData.sys.country }}
               {{ weatherData.weather[0].description }}
             </h3>
-        <v-row> 
-            <v-col class="text-h2" cols-12>
-              <h2>{{ parseInt(weatherData.main.temp) }} °C</h2>
             </v-col>
 
-            <v-col cols="6" d-flex>
-              <v-icon size="100" v-if="description === 'broken clouds'"
-                >mdi-weather-partly-cloudy</v-icon
-              >
-              <v-icon size="100" v-else-if="description === 'few clouds'"
-                >mdi-weather-partly-cloudy</v-icon
-              >
-              <v-icon size="100" v-else-if="description === 'scattered clouds'"
-                >mdi-weather-partly-cloudy</v-icon
-              >
-              <v-icon size="100" v-else-if="description === 'thunderstorm'"
-                >mdi-weather-weather-lightning</v-icon
-              >
-              <v-icon size="100" v-else-if="description === 'rain'"
-                >mdi-weather-weather-pouring</v-icon
-              >
-              <v-icon size="100" v-else-if="description === 'shower rain'"
-                >mdi-weather-weather-pouring</v-icon
-              >
-              <v-icon size="100" v-else-if="description === 'snow'"
-                >mdi-weather-weather-snowy</v-icon
-              >
-              <v-icon size="100" v-else-if="description === 'mist'"
-                >mdi-weather-weather-fog</v-icon
-              >
-              <v-icon size="100" v-else-if="description === 'clear sky'"
-                >mdi-weather-sunny</v-icon
-              >
-              <v-icon size="100" v-else>mdi-weather-partly-cloudy</v-icon>
-            </v-col>
+            <v-col cols="6">
+                <v-icon size="100" v-if="description === 'broken clouds'"
+                  >mdi-weather-partly-cloudy</v-icon
+                >
+                <v-icon size="100" v-else-if="description === 'few clouds'"
+                  >mdi-weather-partly-cloudy</v-icon
+                >
+                <v-icon
+                  size="100"
+                  v-else-if="description === 'scattered clouds'"
+                  >mdi-weather-partly-cloudy</v-icon
+                >
+                <v-icon size="100" v-else-if="description === 'thunderstorm'"
+                  >mdi-weather-weather-lightning</v-icon
+                >
+                <v-icon size="100" v-else-if="description === 'rain'"
+                  >mdi-weather-weather-pouring</v-icon
+                >
+                <v-icon size="100" v-else-if="description === 'shower rain'"
+                  >mdi-weather-weather-pouring</v-icon
+                >
+                <v-icon size="100" v-else-if="description === 'snow'"
+                  >mdi-weather-weather-snowy</v-icon
+                >
+                <v-icon size="100" v-else-if="description === 'mist'"
+                  >mdi-weather-weather-fog</v-icon
+                >
+                <v-icon size="100" v-else-if="description === 'clear sky'"
+                  >mdi-weather-sunny</v-icon
+                >
+                <v-icon size="100" v-else>mdi-weather-partly-cloudy</v-icon>
+              </v-col>
+           </v-row>
+
+            <v-row>
+              <v-col class="text-h2" cols-12>
+                <h2>{{ parseInt(weatherData.main.temp) }} °C</h2>
+              </v-col>
+
+              
             </v-row>
 
             <v-row>
-              <v-col cols="6">
+              <v-col cols="6" lg-cols="3">
                 <h6>Temperatura min:</h6>
                 <p>{{ parseInt(weatherData.main.temp_min) }} °C</p>
               </v-col>
-              <v-col cols="6">
+              <v-col cols="6" lg-cols="3">
                 <h6>Temperatura max:</h6>
                 <p>{{ parseInt(weatherData.main.temp_max) }} °C</p>
               </v-col>
@@ -116,7 +126,7 @@
                 <ul>
                   <li>
                     <v-icon>mdi-human-handsdown</v-icon> Feels like:
-                    {{ weatherData.main.feels_like }}
+                    {{  parseInt(weatherData.main.feels_like) }} °C
                   </li>
                   <li>
                     <v-icon>mdi-human-handsdown</v-icon> Pressure:
@@ -132,10 +142,12 @@
           </v-card>
         </v-expand-transition>
       </v-container>
-
+          <!-- El sol que solo aparece con clear sky -->
+      <div class="sun" v-if="description === 'clear sky'"></div>
+          <!-- Error cuando la ciudad ingresada no existe -->
       <div v-if="showError" class="error">
         <v-alert type="error">
-          aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          No se ha encontrado la ciudad ingresada
         </v-alert>
       </div>
     </main>
@@ -147,7 +159,7 @@ export default {
   data() {
     return {
       weatherData: {},
-      cityName: "Cordoba",
+      cityName: "",
       showError: false,
       dateNow: null,
       loadingData: false,
@@ -195,25 +207,6 @@ export default {
         return "";
       }
       let classes = "";
-
-      if (weather == "broken clouds") {
-        classes = "";
-      } else if (weather == "few clouds") {
-        classes = "";
-      } else if (weather == "scattered clouds") {
-        classes = "clouds";
-      } else if (weather == "shower rain") {
-        classes = "clouds";
-      } else if (weather == "rain") {
-        classes = "clouds";
-      } else if (weather == "thunderstorm") {
-        classes = "clouds";
-      } else if (weather == "mist") {
-        classes = "clouds";
-      } else if (weather == "snow") {
-        classes = "snow";
-      } else classes = "";
-
       if (weather.includes("clouds")) {
         this.classClouds = true;
       }
@@ -276,6 +269,9 @@ export default {
   bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);
+}
+li {
+  list-style: none;
 }
 </style> 
 
