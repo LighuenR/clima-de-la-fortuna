@@ -1,4 +1,7 @@
-# project-weather
+# project-weather 
+
+## Live version: 
+#### https://project-weather-ng2vu.ondigitalocean.app/
 
 ## Project setup
 ```
