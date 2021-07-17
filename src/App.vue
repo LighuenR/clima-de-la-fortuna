@@ -72,45 +72,9 @@
             </v-row>
 
             <v-row>
-              <v-col cols="12">
-                <v-icon size="100" v-if="description === 'broken clouds'"
-                  >mdi-weather-partly-cloudy</v-icon
-                >
-                <v-icon size="100" v-else-if="description === 'few clouds'"
-                  >mdi-weather-partly-cloudy</v-icon
-                >
-                <v-icon
-                  size="120"
-                  v-else-if="description === 'scattered clouds'"
-                  >mdi-weather-partly-cloudy</v-icon
-                >
-                <v-icon size="120" v-else-if="description === 'thunderstorm'"
-                  >mdi-weather-weather-lightning</v-icon
-                >
-                <v-icon size="120" v-else-if="description === 'rain'"
-                  >mdi-weather-weather-pouring</v-icon
-                >
-                <v-icon size="120" v-else-if="description === 'shower rain'"
-                  >mdi-weather-weather-pouring</v-icon
-                >
-                <v-icon size="120" v-else-if="description === 'snow'"
-                  >mdi-weather-weather-snowy</v-icon
-                >
-                <v-icon size="120" v-else-if="description === 'mist'"
-                  >mdi-weather-weather-fog</v-icon
-                >
-                <v-icon size="120" v-else-if="description === 'clear sky'"
-                  >mdi-weather-sunny</v-icon
-                >
-                <v-icon size="120" v-else>mdi-weather-partly-cloudy</v-icon>
-              </v-col>
-
               <v-col class="text-h2" cols="12">
                 <h2>{{ parseInt(weatherData.main.temp) }}°C</h2>
               </v-col>
-            </v-row>
-
-            <v-row>
               <v-col cols="6">
                 <h4>Temperatura min:</h4>
                 <p>{{ parseInt(weatherData.main.temp_min) }} °C</p>
@@ -119,20 +83,49 @@
                 <h4>Temperatura max:</h4>
                 <p>{{ parseInt(weatherData.main.temp_max) }} °C</p>
               </v-col>
+            </v-row>
+
+            <v-row>
+              <v-col cols="12" class="icons">
+                <v-icon size="100" v-if="description === 'broken clouds'"
+                  >mdi-weather-partly-cloudy</v-icon
+                >
+                <v-icon size="100" v-else-if="description === 'few clouds'"
+                  >mdi-weather-partly-cloudy</v-icon
+                >
+                <v-icon
+                  size="110"
+                  v-else-if="description === 'scattered clouds'"
+                  >mdi-weather-partly-cloudy</v-icon
+                >
+                <v-icon size="110" v-else-if="description === 'thunderstorm'"
+                  >mdi-weather-weather-lightning</v-icon
+                >
+                <v-icon size="110" v-else-if="description === 'rain'"
+                  >mdi-weather-weather-pouring</v-icon
+                >
+                <v-icon size="110" v-else-if="description === 'shower rain'"
+                  >mdi-weather-weather-pouring</v-icon
+                >
+                <v-icon size="110" v-else-if="description === 'snow'"
+                  >mdi-weather-weather-snowy</v-icon
+                >
+                <v-icon size="110" v-else-if="description === 'mist'"
+                  >mdi-weather-weather-fog</v-icon
+                >
+                <v-icon size="110" v-else-if="description === 'clear sky'"
+                  >mdi-weather-sunny</v-icon
+                >
+                <v-icon size="110" v-else>mdi-weather-partly-cloudy</v-icon>
+              </v-col>
+
               <v-col cols="12">
                 <ul>
                   <li>
-                    Feels like:
-                    {{ parseInt(weatherData.main.feels_like) }} °C
+                    Feels like:{{ parseInt(weatherData.main.feels_like) }}°C |
                   </li>
-                  <li>
-                   Pressure:
-                    {{ weatherData.main.pressure }}
-                  </li>
-                  <li>
-                   Humidity
-                    {{ weatherData.main.humidity }}%
-                  </li>
+                  <li>Pressure:{{ weatherData.main.pressure }} | </li>
+                  <li>Humidity:{{ weatherData.main.humidity }}% </li>
                 </ul>
               </v-col>
             </v-row>
@@ -272,6 +265,11 @@ export default {
 }
 li {
   list-style: none;
+  display: inline;
+}
+
+.icons {
+padding-top: 0;
 }
 </style> 
 
