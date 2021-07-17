@@ -21,7 +21,7 @@
         </div>
       </div>
 
-      <v-container d-flex justify-center aling-center>
+      <v-container d-flex justify-center align-center>
         <v-card
           width="100%"
           max-width="400"
@@ -48,7 +48,6 @@
         </v-card>
       </v-container>
       <v-container>
-
         <v-expand-transition>
           <v-card
             class="mx-auto main-card glass pa-4 mt-2 d-grid"
@@ -58,20 +57,22 @@
             dark
             v-if="weatherData.name"
           >
-          <v-row class="align-center">
-            <v-col cols="6">
-            <h1>
-              {{ weatherData.name }}
-            </h1>
+            <v-row class="align-center">
+              <v-col cols="12">
+                <h1>
+                  {{ weatherData.name }}
+                </h1>
 
-            <h3>{{ dateNow }}</h3>
-            <h3>
-              {{ weatherData.sys.country }}
-              {{ weatherData.weather[0].description }}
-            </h3>
-            </v-col>
+                <h3>{{ dateNow }}</h3>
+                <h3>
+                  {{ weatherData.sys.country }}
+                  {{ weatherData.weather[0].description }}
+                </h3>
+              </v-col>
+            </v-row>
 
-            <v-col cols="6">
+            <v-row>
+              <v-col cols="12">
                 <v-icon size="100" v-if="description === 'broken clouds'"
                   >mdi-weather-partly-cloudy</v-icon
                 >
@@ -79,61 +80,57 @@
                   >mdi-weather-partly-cloudy</v-icon
                 >
                 <v-icon
-                  size="100"
+                  size="120"
                   v-else-if="description === 'scattered clouds'"
                   >mdi-weather-partly-cloudy</v-icon
                 >
-                <v-icon size="100" v-else-if="description === 'thunderstorm'"
+                <v-icon size="120" v-else-if="description === 'thunderstorm'"
                   >mdi-weather-weather-lightning</v-icon
                 >
-                <v-icon size="100" v-else-if="description === 'rain'"
+                <v-icon size="120" v-else-if="description === 'rain'"
                   >mdi-weather-weather-pouring</v-icon
                 >
-                <v-icon size="100" v-else-if="description === 'shower rain'"
+                <v-icon size="120" v-else-if="description === 'shower rain'"
                   >mdi-weather-weather-pouring</v-icon
                 >
-                <v-icon size="100" v-else-if="description === 'snow'"
+                <v-icon size="120" v-else-if="description === 'snow'"
                   >mdi-weather-weather-snowy</v-icon
                 >
-                <v-icon size="100" v-else-if="description === 'mist'"
+                <v-icon size="120" v-else-if="description === 'mist'"
                   >mdi-weather-weather-fog</v-icon
                 >
-                <v-icon size="100" v-else-if="description === 'clear sky'"
+                <v-icon size="120" v-else-if="description === 'clear sky'"
                   >mdi-weather-sunny</v-icon
                 >
-                <v-icon size="100" v-else>mdi-weather-partly-cloudy</v-icon>
-              </v-col>
-           </v-row>
-
-            <v-row>
-              <v-col class="text-h2" cols-12>
-                <h2>{{ parseInt(weatherData.main.temp) }} °C</h2>
+                <v-icon size="120" v-else>mdi-weather-partly-cloudy</v-icon>
               </v-col>
 
-              
+              <v-col class="text-h2" cols="12">
+                <h2>{{ parseInt(weatherData.main.temp) }}°C</h2>
+              </v-col>
             </v-row>
 
             <v-row>
-              <v-col cols="6" lg-cols="3">
-                <h6>Temperatura min:</h6>
+              <v-col cols="6">
+                <h4>Temperatura min:</h4>
                 <p>{{ parseInt(weatherData.main.temp_min) }} °C</p>
               </v-col>
-              <v-col cols="6" lg-cols="3">
-                <h6>Temperatura max:</h6>
+              <v-col cols="6">
+                <h4>Temperatura max:</h4>
                 <p>{{ parseInt(weatherData.main.temp_max) }} °C</p>
               </v-col>
               <v-col cols="12">
                 <ul>
                   <li>
-                    <v-icon>mdi-human-handsdown</v-icon> Feels like:
-                    {{  parseInt(weatherData.main.feels_like) }} °C
+                    Feels like:
+                    {{ parseInt(weatherData.main.feels_like) }} °C
                   </li>
                   <li>
-                    <v-icon>mdi-human-handsdown</v-icon> Pressure:
+                   Pressure:
                     {{ weatherData.main.pressure }}
                   </li>
                   <li>
-                    <v-icon>mdi-cloud-download</v-icon> Humidity
+                   Humidity
                     {{ weatherData.main.humidity }}%
                   </li>
                 </ul>
@@ -142,9 +139,10 @@
           </v-card>
         </v-expand-transition>
       </v-container>
-          <!-- El sol que solo aparece con clear sky -->
+      <!-- El sol que solo aparece con clear sky -->
       <div class="sun" v-if="description === 'clear sky'"></div>
-          <!-- Error cuando la ciudad ingresada no existe -->
+
+      <!-- Error cuando la ciudad ingresada no existe -->
       <div v-if="showError" class="error">
         <v-alert type="error">
           No se ha encontrado la ciudad ingresada
@@ -210,6 +208,7 @@ export default {
       if (weather.includes("clouds")) {
         this.classClouds = true;
       }
+
       return classes;
     },
 
@@ -231,6 +230,7 @@ export default {
   place-items: center;
   min-height: 100vh;
   color: white;
+  text-align: center;
 }
 
 .glass {
@@ -256,13 +256,13 @@ export default {
   opacity: 0.7;
 }
 
-.cloudy {
+/* .cloudy {
   background: linear-gradient(160deg, grey 0%, #80d0c7 100%);
 }
 
 .snow {
   background: linear-gradient(160deg, lightblue 0%, #80d0c7 100%);
-}
+} */
 
 .error {
   position: absolute;
