@@ -7,6 +7,7 @@
         getBack(weatherData.weather ? weatherData.weather[0].description : null)
       "
     >
+    <div v-if="classSun" class="sun"></div>
       <div v-if="classClouds" class="clouds">
         <div
           :style="`width: ${
@@ -76,11 +77,11 @@
                 <h2>{{ parseInt(weatherData.main.temp) }}°C</h2>
               </v-col>
               <v-col cols="6">
-                <h4>Temperatura min:</h4>
+                <h4>Temperature min:</h4>
                 <p>{{ parseInt(weatherData.main.temp_min) }} °C</p>
               </v-col>
               <v-col cols="6">
-                <h4>Temperatura max:</h4>
+                <h4>Temperature max:</h4>
                 <p>{{ parseInt(weatherData.main.temp_max) }} °C</p>
               </v-col>
             </v-row>
@@ -119,13 +120,11 @@
                 <v-icon size="110" v-else>mdi-weather-partly-cloudy</v-icon>
               </v-col>
 
-              <v-col cols="12">
+              <v-col cols="12" align-center>
                 <ul>
-                  <li>
-                    Feels like:{{ parseInt(weatherData.main.feels_like) }}°C |
-                  </li>
-                  <li>Pressure:{{ weatherData.main.pressure }} | </li>
-                  <li>Humidity:{{ weatherData.main.humidity }}% </li>
+                  <li>Feels like:{{ parseInt(weatherData.main.feels_like) }} °C |</li>
+                  <li> Pressure:{{ weatherData.main.pressure }}  </li>
+                  <li>| Humidity:{{ weatherData.main.humidity }}% </li>
                 </ul>
               </v-col>
             </v-row>
@@ -133,7 +132,7 @@
         </v-expand-transition>
       </v-container>
       <!-- El sol que solo aparece con clear sky -->
-      <div class="sun" v-if="description === 'clear sky'"></div>
+      
 
       <!-- Error cuando la ciudad ingresada no existe -->
       <div v-if="showError" class="error">
@@ -156,6 +155,7 @@ export default {
       loadingData: false,
       description: "",
       classClouds: false,
+      classSun: false,
     };
   },
 
@@ -201,6 +201,9 @@ export default {
       if (weather.includes("clouds")) {
         this.classClouds = true;
       }
+      else if (weather === "clear sky") {
+          this.classSun = true;
+        }
 
       return classes;
     },
