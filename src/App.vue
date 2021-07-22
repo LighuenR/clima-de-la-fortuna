@@ -121,6 +121,7 @@
                 >
                 <v-icon size="110" v-else>mdi-weather-partly-cloudy</v-icon>
               </v-col>
+           <v-container>
               <v-col cols="12">
                 <ul class="pa-0">
                   <li>
@@ -130,6 +131,7 @@
                   <li>Humidity: {{ weatherData.main.humidity }}%</li>
                 </ul>
               </v-col>
+              </v-container>
             </v-row>
           </v-card>
         </v-expand-transition>
