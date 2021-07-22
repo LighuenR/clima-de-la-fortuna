@@ -7,7 +7,9 @@
         getBack(weatherData.weather ? weatherData.weather[0].description : null)
       "
     >
-    <div v-if="classSun" class="sun"></div>
+      <!-- El sol de fondo -->
+      <div v-if="classSun" class="sun"></div>
+      <!-- Las nubes de fondo -->
       <div v-if="classClouds" class="clouds">
         <div
           :style="`width: ${
@@ -28,7 +30,7 @@
           max-width="400"
           color="rgba(0, 0, 0, 0.3)"
           dark
-          class="glass d-flex align-center py-2"
+          class="glass d-flex align-center pa-2"
         >
           <v-text-field
             @keydown.enter="getCurrentWeather()"
@@ -76,18 +78,18 @@
               <v-col class="text-h2" cols="12">
                 <h2>{{ parseInt(weatherData.main.temp) }}°C</h2>
               </v-col>
-              <v-col cols="6" class="temps">
+              <v-col cols="6" class="pb-0">
                 <h4>Temperature min:</h4>
                 <p>{{ parseInt(weatherData.main.temp_min) }} °C</p>
               </v-col>
-              <v-col cols="6" class="temps">
+              <v-col cols="6" class="pb-0">
                 <h4>Temperature max:</h4>
                 <p>{{ parseInt(weatherData.main.temp_max) }} °C</p>
               </v-col>
             </v-row>
 
             <v-row>
-              <v-col cols="12" class="icons">
+              <v-col cols="12" class="pa-0">
                 <v-icon size="100" v-if="description === 'broken clouds'"
                   >mdi-weather-partly-cloudy</v-icon
                 >
@@ -119,20 +121,20 @@
                 >
                 <v-icon size="110" v-else>mdi-weather-partly-cloudy</v-icon>
               </v-col>
-              <v-container>
               <v-col cols="12">
-                <ul class="list">
-                  <li>Feels like: {{ parseInt(weatherData.main.feels_like) }} °C |</li>
-                  <li> Pressure: {{ weatherData.main.pressure }} | </li>
-                  <li> Humidity: {{ weatherData.main.humidity }}% </li>
+                <ul class="pa-0">
+                  <li>
+                    Feels like: {{ parseInt(weatherData.main.feels_like) }} °C |
+                  </li>
+                  <li>Pressure: {{ weatherData.main.pressure }} | </li>
+                  <li>Humidity: {{ weatherData.main.humidity }}%</li>
                 </ul>
               </v-col>
-              </v-container>
             </v-row>
           </v-card>
         </v-expand-transition>
       </v-container>
-    
+
       <!-- Error cuando la ciudad ingresada no existe -->
       <div v-if="showError" class="error">
         <v-alert type="error">
@@ -199,10 +201,9 @@ export default {
       let classes = "";
       if (weather.includes("clouds")) {
         this.classClouds = true;
+      } else if (weather === "clear sky") {
+        this.classSun = true;
       }
-      else if (weather === "clear sky") {
-          this.classSun = true;
-        }
 
       return classes;
     },
@@ -233,21 +234,10 @@ export default {
   backdrop-filter: blur(10px);
 }
 
-.list {
-  padding: 0%;
-}
-
 li {
   list-style: none;
   display: inline;
   padding: 0;
-}
-.temps {
-  padding-bottom: 0;
-}
-
-.icons {
-padding: 0;
 }
 
 .clouds {
@@ -279,7 +269,6 @@ padding: 0;
   left: 50%;
   transform: translateX(-50%);
 }
-
 </style> 
 
 
