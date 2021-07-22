@@ -76,11 +76,11 @@
               <v-col class="text-h2" cols="12">
                 <h2>{{ parseInt(weatherData.main.temp) }}°C</h2>
               </v-col>
-              <v-col cols="6">
+              <v-col cols="6" class="temps">
                 <h4>Temperature min:</h4>
                 <p>{{ parseInt(weatherData.main.temp_min) }} °C</p>
               </v-col>
-              <v-col cols="6">
+              <v-col cols="6" class="temps">
                 <h4>Temperature max:</h4>
                 <p>{{ parseInt(weatherData.main.temp_max) }} °C</p>
               </v-col>
@@ -119,21 +119,20 @@
                 >
                 <v-icon size="110" v-else>mdi-weather-partly-cloudy</v-icon>
               </v-col>
-
-              <v-col cols="12" align-center>
-                <ul>
-                  <li>Feels like:{{ parseInt(weatherData.main.feels_like) }} °C |</li>
-                  <li> Pressure:{{ weatherData.main.pressure }}  </li>
-                  <li>| Humidity:{{ weatherData.main.humidity }}% </li>
+              <v-container>
+              <v-col cols="12">
+                <ul class="list">
+                  <li>Feels like: {{ parseInt(weatherData.main.feels_like) }} °C |</li>
+                  <li> Pressure: {{ weatherData.main.pressure }} | </li>
+                  <li> Humidity: {{ weatherData.main.humidity }}% </li>
                 </ul>
               </v-col>
+              </v-container>
             </v-row>
           </v-card>
         </v-expand-transition>
       </v-container>
-      <!-- El sol que solo aparece con clear sky -->
-      
-
+    
       <!-- Error cuando la ciudad ingresada no existe -->
       <div v-if="showError" class="error">
         <v-alert type="error">
@@ -234,6 +233,23 @@ export default {
   backdrop-filter: blur(10px);
 }
 
+.list {
+  padding: 0%;
+}
+
+li {
+  list-style: none;
+  display: inline;
+  padding: 0;
+}
+.temps {
+  padding-bottom: 0;
+}
+
+.icons {
+padding: 0;
+}
+
 .clouds {
   position: absolute;
   width: 100%;
@@ -252,10 +268,7 @@ export default {
   opacity: 0.7;
 }
 
-/* .cloudy {
-  background: linear-gradient(160deg, grey 0%, #80d0c7 100%);
-}
-
+/* 
 .snow {
   background: linear-gradient(160deg, lightblue 0%, #80d0c7 100%);
 } */
@@ -266,14 +279,7 @@ export default {
   left: 50%;
   transform: translateX(-50%);
 }
-li {
-  list-style: none;
-  display: inline;
-}
 
-.icons {
-padding-top: 0;
-}
 </style> 
 
 
