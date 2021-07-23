@@ -11,17 +11,7 @@
       <div v-if="classSun" class="sun"></div>
       <!-- Las nubes de fondo -->
       <div v-if="classClouds" class="clouds">
-        <div
-          :style="`width: ${
-            Math.random() * (700 - 100) + 100
-          }px; position: absolute; top: ${
-            Math.random() * (30 - 1) + 1
-          }%; left: ${Math.random() * (100 - 1) + 1}%`"
-          v-for="(cloud, i) in randomClouds()"
-          :key="i"
-        >
-          <img style="width: 100%" src="./assets/cloud.png" alt="" />
-        </div>
+        
       </div>
 
       <v-container d-flex justify-center align-center>
@@ -159,6 +149,7 @@ export default {
       description: "",
       classClouds: false,
       classSun: false,
+    
     };
   },
 
@@ -191,37 +182,39 @@ export default {
           this.loadingData = false;
           this.expand = !this.expand;
           this.loadingData = false;
+
         })
         .catch((err) => console.log(err));
     },
 
-    getBack(weather) {
-      /* console.log(weather) */
+    getBack(weather) { 
+      console.log(this.weatherData)
       if (weather == null) {
         return "";
       }
       let classes = "";
       if (weather.includes("clouds")) {
         this.classClouds = true;
-      } else if (weather === "clear sky") {
+        
+} 
+      if (weather === "clear sky") {
         this.classSun = true;
+      }
+      else if(this.weatherData.weather[0].icon[this.weatherData.weather[0].icon.length-1] === "n") {
+        this.classSun = false;
+        return " night"
       }
 
       return classes;
     },
-
-    randomClouds(number) {
-      if (!this.description.includes("clouds")) {
-        return 0;
-      }
-      number = 30;
-      return Math.ceil(Math.random() * (number - 5) + 5);
-    },
+  
   },
 };
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
 .main {
   display: grid;
   background: linear-gradient(160deg, blue 0%, #80d0c7 100%);
@@ -229,6 +222,11 @@ export default {
   min-height: 100vh;
   color: white;
   text-align: center;
+  font-family: "Lato";
+}
+
+.night {
+  background: linear-gradient(160deg, black 0%, rgba(0,0,0, 0.3) 100%);
 }
 
 .glass {
@@ -247,6 +245,12 @@ li {
   width: 100%;
   min-height: 100vh;
   overflow: hidden;
+  background: url("./assets/cloud.png");
+  background-size: 600px;
+  background-position: 80% 20%;
+  background-repeat: no-repeat;
+
+
 }
 .sun {
   position: absolute;
@@ -259,6 +263,8 @@ li {
   background-position: 80% 20%;
   opacity: 0.7;
 }
+
+
 
 /* 
 .snow {
