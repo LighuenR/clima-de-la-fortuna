@@ -276,6 +276,7 @@ li {
   bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);
+  width: 70%;
 }
 </style> 
 
